@@ -17,50 +17,52 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
 
 public class Login {
-    WebDriver driver;
+    AndroidDriver driver;
 
     @Before
     public void setUp() throws MalformedURLException {
-        // Created object of DesiredCapabilities class.
-        DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("no",true);
+            // Created object of DesiredCapabilities class.
+            DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("newCommandTimeout", 100000);
+            capabilities.setCapability("automationName","UiAutomator2");
 
-        capabilities.setCapability("app-wait-activity", "activity-to-wait-for");
+            capabilities.setCapability("no",true);
 
-        // Set android deviceName desired capability. Set your device name.
-        capabilities.setCapability("deviceName", "Moto G Play Build/NPIS26.48-43-2");
+            capabilities.setCapability("newCommandTimeout", 100000);
 
-        // Set BROWSER_NAME desired capability. It's Android in our case here.
-        //capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
+            capabilities.setCapability("app-wait-activity", "activity-to-wait-for");
 
-        // Set android VERSION desired capability. Set your mobile device's OS version.
-        capabilities.setCapability(CapabilityType.VERSION, "7.1.1");
+            capabilities.setCapability("deviceName", "Moto G Play Build/NPIS26.48-43-2");
 
-        // Set android platformName desired capability. It's Android in our case here.
-        capabilities.setCapability("platformName", "Android");
+            // Set BROWSER_NAME desired capability. It's Android in our case here.
+            //capabilities.setCapability(CapabilityType.BROWSER_NAME, "Android");
 
-        // Set android appPackage desired capability. It is
-        // com.android.calculator2 for calculator application.
-        // Set your application's appPackage if you are using any other app.
-        capabilities.setCapability("appPackage", "com.grability.rappi.dev");
+            // Set android VERSION desired capability. Set your mobile device's OS version.
+            capabilities.setCapability(CapabilityType.VERSION, "7.1.1");
 
-        // Set android appActivity desired capability. It is
+            // Set android platformName desired capability. It's Android in our case here.
+            capabilities.setCapability("platformName", "Android");
+
+            // Set android appPackage desired capability. It is
+            // com.android.calculator2 for calculator application.
+            // Set your application's appPackage if you are using any other app.
+            capabilities.setCapability("appPackage", "com.grability.rappi.dev");
+
+            // Set android appActivity desired capability. It is
             // com.android.calculator2.Calculator for calculator application.
-        // Set your application's appPackage if you are using any other app.
-        capabilities.setCapability("appActivity", "com.grability.app.splash.SplashActivity");
+            // Set your application's appPackage if you are using any other app.
+            capabilities.setCapability("appActivity", "com.grability.app.splash.SplashActivity");
 
-        // Created object of RemoteWebDriver will all set capabilities.
-        // Set appium server address and port number in URL string.
-        // It will launch calculator app in android device.
-        driver = new RemoteWebDriver(new URL("http://0.0.0.0:58045/wd/hub"), capabilities);
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            // Created object of RemoteWebDriver will all set capabilities.
+            // Set appium server address and port number in URL string.
+            // It will launch app in android device.
 
-
+            driver = new AndroidDriver(new URL("http://0.0.0.0:58045/wd/hub/"),capabilities);
+            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
     @Test
@@ -75,7 +77,8 @@ public class Login {
         // Enter data in EditText
         final WebElement inputField = driver.findElement(By.id("com.grability.rappi.dev:id/editText_phone"));
                 inputField.sendKeys("3133647701");
-                //I need a method here that close de keyboard
+                //close keyboard
+                driver.hideKeyboard();
 
 
         driver.findElement(By.id("com.grability.rappi.dev:id/id/textView")).click();
