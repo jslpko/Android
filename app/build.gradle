@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.example.johan.appium"
         minSdkVersion 19
-        targetSdkVersion 24
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -25,10 +25,9 @@ android {
 }
 
 dependencies {
-    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.1'
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:24.2.1'
     compile files('libs/cglib-nodep-3.2.4.jar')
     compile files('libs/commons-codec-1.10.jar')
     compile files('libs/commons-exec-1.3.jar')
@@ -64,4 +63,5 @@ dependencies {
     compile files('libs/xalan-2.7.2.jar')
     compile files('libs/xercesImpl-2.11.0.jar')
     compile files('libs/xml-apis-1.4.01.jar')
+    testImplementation 'org.testng:testng:7.1.0'
 }
